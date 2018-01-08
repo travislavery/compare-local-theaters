@@ -1,24 +1,14 @@
 require "pry"
-
 class Movie
 	attr_accessor :title, :rating, :length, :theaters
 	@@all = []
 	def initialize(movie_hash)
 		movie_hash.each do |key, value| 
-			if key != :chain && key != :show_times && key != :theater_object
+			if key != :showtimes && key != :theater
 				self.send(("#{key}="), value)
 			end
 		end
-		@theaters = {
-			:cinemark => {
-				:show_times => "",
-				:theater_object => movie_hash[:theater_object]
-			},
-			:regal => {
-				:show_times => "",
-				:theater_object => ""
-			}
-		} 
+		@theaters = []
 		self.add_additional_attributes(movie_hash)
 		@@all << self
 	end
@@ -51,18 +41,35 @@ class Movie
 	end
 
 	def add_additional_attributes(movie_hash)
-		if movie_hash[:chain] == "cinemark"
-			self.theaters[:cinemark][:show_times] = movie_hash[:show_times]
-		elsif movie_hash[:chain] == "regal"
-			self.theaters[:regal][:show_times] = movie_hash[:show_times]
+		if @theaters.include?(movie_hash[:theater])
+			theater = @theaters.find{|theater| theater.name == movie_hash[:theater][:name]}
+			theater.add_movie_with_showtimes(self, movie_hash[:showtimes])
+		else
+			theater = movie_hash[:theater]
+			@theaters << theater
+			theater.add_movie_with_showtimes(self, movie_hash[:showtimes])
 		end
+		self
 	end
 
 	def self.show_times
 		self.all.each_with_index do |movie, i|
 			puts "#{i+1}. #{movie.title}"
-			puts "Cinemark: #{movie.theaters[:cinemark][:show_times]}"
-			puts "Regal: #{movie.theaters[:regal][:show_times]}"
+			cinemark = movie.theaters.find{|theater| theater.chain == :cinemark}
+			if cinemark == nil
+				cinemark_movie_showtimes = "No showings at this theater."
+			else
+				cinemark_movie_showtimes = cinemark.movies["#{movie.title}"][:showtimes]
+			end
+			
+			regal = movie.theaters.find{|theater| theater.chain == :regal}
+			if regal == nil
+				regal_movie_showtimes = "No showings at this theater"
+			else
+				regal_movie_showtimes = regal.movies["#{movie.title}"][:showtimes]
+			end
+			puts "Cinemark: #{cinemark_movie_showtimes}"
+			puts "Regal: #{regal_movie_showtimes}"
 		end
 	end
 
@@ -74,3 +81,17 @@ class Movie
 		puts "Regal Times: #{self.regal}"
 	end
 end
+
+
+
+
+			#:cinemark => {
+			#	:show_times => "",
+			#	:theater_object => movie_hash[:theater_object]
+			#},
+			#:regal => {
+			#	:show_times => "",
+			#	:theater_object => ""
+			#}
+
+#theater.movie[:show_times] = movie_hash[:show_times]

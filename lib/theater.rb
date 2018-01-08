@@ -1,9 +1,10 @@
+require "pry"
 class Theater
 	attr_accessor :name, :address, :phone_number, :movies, :chain, :website
 	@@all = []
 	def initialize
 		@@all << self
-		@movies = []
+		@movies = {}
 	end
 
 	def self.create_from_scraper(theater_hash)
@@ -14,23 +15,18 @@ class Theater
 		theater
 	end
 
-	def self.create_or_update_from_scraper(theater_hash, movie)
-		if @@all.include?(theater_hash[:name])
-		end
-	end
-
 	def self.all
 		@@all
 	end
 
-	def gather_movies
-		Movie.all.collect do |movie|
-			if movie.theaters[self.chain][:show_times] != ""
-				if !@movies.include?(movie)
-					@movies << movie
-				end
-			end
-		end
+	def add_movie_with_showtimes(movie, showtimes)
+
+		@movies["#{movie.title}"] = {
+			:movie => movie,
+			:showtimes => showtimes
+		}
+		#binding.pry
+
 	end
 
 	def more_info

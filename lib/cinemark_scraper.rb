@@ -31,10 +31,9 @@ class Cinemark_scraper
 				m.text.split(/\r*\n*\s+/)[1]
 			end
 			{
-				:chain => "cinemark",
-				:theater_object => "",#Theater.create_or_update_from_scraper(self.scrape_theater(url))
+				:theater => Theater.create_from_scraper(Cinemark_scraper.scrape_theater(url)),
 				:title => movie.css("h2").text,
-				:show_times => showtimes_array.join(" "),
+				:showtimes => showtimes_array.join(" "),
 				:rating => movie.css(".showtimeMovieRating").text,
 				:length => movie.css(".showtimeMovieRuntime").text
 			}

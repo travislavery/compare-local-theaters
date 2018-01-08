@@ -31,9 +31,9 @@ class Regal_scraper
 				m.split(/\s+/).join("").downcase
 			end
 			{
-				:chain => "regal",
+				:theater => Theater.create_from_scraper(Regal_scraper.scrape_theater(url)),
 				:title => movie.css(".title a").text.split(/\s{2,}/)[1],
-				:show_times => showtimes_array.sort.join(" "),
+				:showtimes => showtimes_array.sort.join(" "),
 				:rating => movie.css(".list-inline title").text.split("Rated ")[1],
 				:length => movie.css(".list-inline li:nth-child(2)").text
 			}
