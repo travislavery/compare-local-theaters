@@ -57,4 +57,16 @@ class Movie
 		end
 	end
 
+	def more_info
+		puts "#{self.title}"
+		puts "Rating: #{self.rating}"
+		puts "Length: #{self.length}"
+		puts "Cinemark Times: #{self.cinemark}"
+		puts "Regal Times: #{self.regal}"
+	end
+
+	def cinemark=(times)
+
+		times
+	end
 end
