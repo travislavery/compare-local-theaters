@@ -31,7 +31,7 @@ class Cinemark_scraper
 				m.text.split(/\r*\n*\s+/)[1]
 			end
 			{
-				:chain => "regal",
+				:chain => "cinemark",
 				:title => movie.css("h2").text,
 				:show_times => showtimes_array.join(" "),
 				:rating => movie.css(".showtimeMovieRating").text,
