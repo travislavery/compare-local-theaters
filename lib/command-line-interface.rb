@@ -17,7 +17,7 @@ regal = Theater.create_from_scraper(regal_theater)
 Movie.create_from_scraper(regal_movies)
 Movie.create_from_scraper(cinemark_movies)
 
-binding.pry
+#binding.pry
 Movie.show_times
 
 #cinemark.movies

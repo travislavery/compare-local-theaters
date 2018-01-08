@@ -12,7 +12,7 @@ class Cinemark_scraper
 
 		{
 			:website => url,
-			:chain => :cinemark
+			:chain => :cinemark,
 			:name => "Cinemark Sugar House",
 			:address => theater_info.text.split(/\r\n\s+/)[1].split(/\s+/).join(" "),
 			:phone_number => theater_info.text.split(/\r\n\s+/)[2]
@@ -32,6 +32,7 @@ class Cinemark_scraper
 			end
 			{
 				:chain => "cinemark",
+				:theater_object => "",#Theater.create_or_update_from_scraper(self.scrape_theater(url))
 				:title => movie.css("h2").text,
 				:show_times => showtimes_array.join(" "),
 				:rating => movie.css(".showtimeMovieRating").text,
