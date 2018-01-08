@@ -4,9 +4,7 @@ require "open-uri"
 
 class Cinemark_scraper
 
-
 	def self.scrape_theater(url)
-		#"https://www.cinemark.com/utah/cinemark-sugar-house"
 		html = open(url)
 		doc = Nokogiri::HTML(html)
 
@@ -19,9 +17,6 @@ class Cinemark_scraper
 			:address => theater_info.text.split(/\r\n\s+/)[1].split(/\s+/).join(" "),
 			:phone_number => theater_info.text.split(/\r\n\s+/)[2]
 		}
-		puts "#{theater}"
-		
-
 	end
 
 	def self.scrape_movies(url)
@@ -41,12 +36,8 @@ class Cinemark_scraper
 				:rating => movie.css(".showtimeMovieRating").text,
 				:length => movie.css(".showtimeMovieRuntime").text
 			}
-			#binding.pry
-		end
-		puts "#{output}"
-		
+		end		
 	end
 end
 
-Cinemark_scraper.scrape_theater("https://www.cinemark.com/utah/cinemark-sugar-house")
-Cinemark_scraper.scrape_movies("https://www.cinemark.com/utah/cinemark-sugar-house")
+
