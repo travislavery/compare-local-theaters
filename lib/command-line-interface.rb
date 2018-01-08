@@ -11,4 +11,5 @@ regal_theater = Regal_scraper.scrape_theater("https://www.regmovies.com/theaters
 regal_movies = Regal_scraper.scrape_movies("https://www.regmovies.com/theaters/regal-crossroad-14-rpx/c00662716661")
 
 Movie.create_from_scraper(cinemark_movies)
+Movie.create_from_scraper(regal_movies)
 Movie.show_times
