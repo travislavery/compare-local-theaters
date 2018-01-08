@@ -10,9 +10,9 @@ class Regal_scraper
 
 		theater_info = doc.css(".page-header.venue")
 
-		theater = {
+		{
 			:website => url,
-			:chain => "regal",
+			:chain => :regal,
 			:name => theater_info.css("h1").text,
 			:address => theater_info.css(".address a").text.split(" view")[0],
 			:phone_number => "None"

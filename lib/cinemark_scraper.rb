@@ -10,9 +10,9 @@ class Cinemark_scraper
 
 		theater_info = doc.css("#xsTheatreInfo .theatreInfoCollapseBody p")
 
-		theater = {
+		{
 			:website => url,
-			:chain => "cinemark",
+			:chain => :cinemark
 			:name => "Cinemark Sugar House",
 			:address => theater_info.text.split(/\r\n\s+/)[1].split(/\s+/).join(" "),
 			:phone_number => theater_info.text.split(/\r\n\s+/)[2]
