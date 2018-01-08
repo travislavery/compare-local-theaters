@@ -5,17 +5,18 @@ class Movie
 	@@all = []
 	def initialize(movie_hash)
 		movie_hash.each do |key, value| 
-			if key != :chain && key != :show_times
+			if key != :chain && key != :show_times && key != :theater_object
 				self.send(("#{key}="), value)
 			end
 		end
 		@theaters = {
 			:cinemark => {
 				:show_times => "",
-				:more_info => ""
+				:theater_object => movie_hash[:theater_object]
 			},
 			:regal => {
-				:show_times => ""
+				:show_times => "",
+				:theater_object => ""
 			}
 		} 
 		self.add_additional_attributes(movie_hash)
@@ -51,7 +52,6 @@ class Movie
 
 	def add_additional_attributes(movie_hash)
 		if movie_hash[:chain] == "cinemark"
-			#binding.pry
 			self.theaters[:cinemark][:show_times] = movie_hash[:show_times]
 		elsif movie_hash[:chain] == "regal"
 			self.theaters[:regal][:show_times] = movie_hash[:show_times]

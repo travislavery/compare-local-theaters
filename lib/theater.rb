@@ -14,6 +14,11 @@ class Theater
 		theater
 	end
 
+	def self.create_or_update_from_scraper(theater_hash, movie)
+		if @@all.include?(theater_hash[:name])
+		end
+	end
+
 	def self.all
 		@@all
 	end
