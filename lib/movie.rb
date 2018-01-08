@@ -1,7 +1,7 @@
 require "pry"
 
 class Movie
-	attr_accessor :title, :rating, :length, :cinemark, :regal
+	attr_accessor :title, :rating, :length, :theaters
 	@@all = []
 	def initialize(movie_hash)
 		movie_hash.each do |key, value| 
@@ -9,6 +9,15 @@ class Movie
 				self.send(("#{key}="), value)
 			end
 		end
+		@theaters = {
+			:cinemark => {
+				:show_times => "",
+				:more_info => ""
+			},
+			:regal => {
+				:show_times => ""
+			}
+		} 
 		self.add_additional_attributes(movie_hash)
 		@@all << self
 	end
@@ -42,18 +51,18 @@ class Movie
 
 	def add_additional_attributes(movie_hash)
 		if movie_hash[:chain] == "cinemark"
-
-			self.cinemark = movie_hash[:show_times]
+			#binding.pry
+			self.theaters[:cinemark][:show_times] = movie_hash[:show_times]
 		elsif movie_hash[:chain] == "regal"
-			self.regal = movie_hash[:show_times]
+			self.theaters[:regal][:show_times] = movie_hash[:show_times]
 		end
 	end
 
 	def self.show_times
 		self.all.each_with_index do |movie, i|
 			puts "#{i+1}. #{movie.title}"
-			puts "Cinemark: #{movie.cinemark}"
-			puts "Regal: #{movie.regal}"
+			puts "Cinemark: #{movie.theaters[:cinemark][:show_times]}"
+			puts "Regal: #{movie.theaters[:regal][:show_times]}"
 		end
 	end
 
@@ -63,10 +72,5 @@ class Movie
 		puts "Length: #{self.length}"
 		puts "Cinemark Times: #{self.cinemark}"
 		puts "Regal Times: #{self.regal}"
-	end
-
-	def cinemark=(times)
-
-		times
 	end
 end
