@@ -26,7 +26,7 @@ class Cinemark_scraper
 		movies = doc.css(".showtimeMovie")
 
 
-		output = movies.collect do |movie|
+		movies.collect do |movie|
 			showtimes_array = movie.css(".showtimeMovieTimes .showtime").collect do |m|
 				m.text.split(/\r*\n*\s+/)[1]
 			end

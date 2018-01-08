@@ -3,7 +3,7 @@ require "pry"
 require "open-uri"
 
 class Regal_scraper
-	
+
 	def self.scrape_theater(url)
 		html = open(url)
 		doc = Nokogiri::HTML(html)
@@ -26,11 +26,11 @@ class Regal_scraper
 		movies = doc.css(".showtimes-container .showtime-panel")
 
 
-		output = movies.collect do |movie|
+		movies.collect do |movie|
 			showtimes_array = movie.css(".format-showtimes").text.split(/\s{2,}/).collect do |m|
 				m.split(/\s+/).join("").downcase
 			end
-			thing = {
+			{
 				:title => movie.css(".title a").text.split(/\s{2,}/)[1],
 				:show_times => showtimes_array.sort.join(" "),
 				:rating => movie.css(".list-inline title").text.split("Rated ")[1],
