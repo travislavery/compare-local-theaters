@@ -1,9 +1,18 @@
 class Movie
-	attr_accessor :title, :rating, :length, :show_times, :carmike, :regal
-
+	attr_accessor :title, :rating, :length, :carmike, :regal
 	@@all = []
 	def initialize(movie_hash)
-		movie_hash.each {|key, value| self.send(("#{key}="), value)}
+		@@all.each do |movie|
+			if movie.title == movie_hash[:title]
+
+			else
+		end
+			@@all.include?(movie_hash[:title])
+
+		end
+		movie_hash.each do |key, value| 
+			self.send(("#{key}="), value)
+		end
 		@@all << self
 	end
 
@@ -17,4 +26,14 @@ class Movie
 		@@all
 	end
 
+	def add_additional_attributes(movie_hash)
+		if movie_hash[:chain] == "carmike"
+			@carmike
+	end
+	def show_times
+		@show_times = {
+			:carmike => [],
+			:regal => []
+		}
+	end
 end
