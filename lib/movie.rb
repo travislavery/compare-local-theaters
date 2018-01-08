@@ -31,10 +31,12 @@ class Movie
 			movie.regal = movie_hash[:show_times]
 		end
 	end
-	def show_times
-		@show_times = {
-			:carmike => [],
-			:regal => []
-		}
+
+	def self.show_times
+		self.all.each do |movie|
+			puts "#{movie.title}"
+			puts "Carmike: #{movie.carmike}"
+			puts "Regal: #{movie.regal}"
+		end
 	end
 end
