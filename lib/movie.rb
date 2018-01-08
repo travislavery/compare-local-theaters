@@ -33,8 +33,8 @@ class Movie
 	end
 
 	def self.show_times
-		self.all.each do |movie|
-			puts "#{movie.title}"
+		self.all.each_with_index do |movie, i|
+			puts "#{i}. #{movie.title}"
 			puts "Carmike: #{movie.carmike}"
 			puts "Regal: #{movie.regal}"
 		end
