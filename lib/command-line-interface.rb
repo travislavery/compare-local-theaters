@@ -11,7 +11,6 @@ class CommandLineInterface
 		@keep_viewing = true
 		args.each do |arg|
 			Movie.create_from_scraper(arg)
-			#binding.pry
 		end
 	end
 	def start
@@ -80,14 +79,14 @@ class CommandLineInterface
 				if type == "movie"
 					if input.to_i > 0 && input.to_i <= Movie.all.count+1
 						continue = false
-						return input.to_i
+						return input.to_i - 1
 					else
 						puts "Invalid entry"
 					end
 				elsif type == "theater"
 					if input.to_i > 0 && input.to_i <= Theater.all.count+1
 						continue = false
-						return input.to_i
+						return input.to_i - 1
 					else 
 						puts "Invalid entry"
 					end
@@ -96,29 +95,6 @@ class CommandLineInterface
 		end
 	end
 end
-
-
-
-		#Movie.create_from_scraper(regal_movies)
-		#Movie.create_from_scraper(cinemark_movies)
-
-
-
-
-
-
-
-
-
-
-#
-#Theater.all[0].showtimes
-#binding.pry
-#Movie.show_times
-
-#cinemark.movies
-#cinemark.movie_titles
-
 
 #### SHOULDN'T BE NEEDED ####
 #regal_theater = Regal_scraper.scrape_theater("https://www.regmovies.com/theaters/regal-crossroad-14-rpx/c00662716661")

@@ -38,24 +38,26 @@ class Theater
 
 	def self.theater_info
 		self.all.each do |theater|
-			puts "#{theater.name}"
-			puts "Address: #{theater.address}"
-			puts "Phone Number: #{theater.phone_number}"
-			puts "Website: #{theater.website}"
-			puts "#{movie_titles.join(", ")}"
+			puts "----------------------------".colorize(:white)
+			puts "	#{theater.name}"
+			puts "----------------------------".colorize(:white)
+			puts "Address: #{theater.address}".colorize(:light_blue)
+			puts "Phone Number: #{theater.phone_number}".colorize(:light_blue)
+			puts "Website: #{theater.website}".colorize(:light_blue)
+			#puts "Currently showing: #{theater.movie_titles.join(", ")}".colorize(:light_green)
 		end
 	end
 
 	def movie_titles
-		@movies.collect do |movie|
-			movie.title
+		self.movies.collect do |movie|
+			movie[0]
 		end
 	end
 
 	def showtimes
-		self.movies.each do |movie|
+		self.movies.each_with_index do |movie, i|
 			#binding.pry
-			puts "#{movie[0]}".colorize(:dark_blue)
+			puts "#{i+1}. #{movie[0]}".colorize(:dark_blue)
 			puts "	#{movie[1][:showtimes]}".colorize(:light_blue)
 		end
 	end
