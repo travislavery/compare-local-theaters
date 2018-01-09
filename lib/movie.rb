@@ -19,9 +19,7 @@ class Movie
 			current_movies_in_all = self.all.collect do |movie|
 				movie.title
 			end
-			#binding.pry
 			if current_movies_in_all.include?(movie_hash[:title])
-				#binding.pry
 				movie_in_all = self.all.find do |movie|
 					movie.title == movie_hash[:title]
 				end
@@ -30,10 +28,7 @@ class Movie
 			else
 				Movie.new(movie_hash)
 			end
-			#binding.pry
-			
 		end
-		#binding.pry
 		
 	end
 
@@ -65,22 +60,6 @@ class Movie
 				puts "	#{theater.name}: #{showtimes}".colorize(colors_for_theaters[i])
 			end
 			puts "----------------------------------------".colorize(:black)
-			#cinemark = movie.theaters.find{|theater| theater.chain == :cinemark}
-			#if cinemark == nil
-			#	cinemark_movie_showtimes = "No showings at this theater."
-			#else
-			#	cinemark_movie_showtimes = cinemark.movies["#{movie.title}"][:showtimes]
-			#end
-			#
-			#regal = movie.theaters.find{|theater| theater.chain == :regal}
-			#if regal == nil
-			#	regal_movie_showtimes = "No showings at this theater"
-			#else
-			#	regal_movie_showtimes = regal.movies["#{movie.title}"][:showtimes]
-			#end
-			#puts "	Cinemark: #{cinemark_movie_showtimes}".colorize(:light_blue)
-			#puts "	Regal: #{regal_movie_showtimes}".colorize(:light_green)
-			
 		end
 	end
 
@@ -88,21 +67,5 @@ class Movie
 		puts "#{self.title}"
 		puts "Rating: #{self.rating}"
 		puts "Length: #{self.length}"
-		puts "Cinemark Times: #{self.cinemark}"
-		puts "Regal Times: #{self.regal}"
 	end
 end
-
-
-
-
-			#:cinemark => {
-			#	:show_times => "",
-			#	:theater_object => movie_hash[:theater_object]
-			#},
-			#:regal => {
-			#	:show_times => "",
-			#	:theater_object => ""
-			#}
-
-#theater.movie[:show_times] = movie_hash[:show_times]
