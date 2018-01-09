@@ -25,13 +25,13 @@ class Cinemark_scraper
 
 		movies = doc.css(".showtimeMovie")
 
-
+		theater = Theater.create_from_scraper(Cinemark_scraper.scrape_theater(url))
 		movies.collect do |movie|
 			showtimes_array = movie.css(".showtimeMovieTimes .showtime").collect do |m|
 				m.text.split(/\r*\n*\s+/)[1]
 			end
 			{
-				:theater => Theater.create_from_scraper(Cinemark_scraper.scrape_theater(url)),
+				:theater => theater,
 				:title => movie.css("h2").text,
 				:showtimes => showtimes_array.join(" "),
 				:rating => movie.css(".showtimeMovieRating").text,

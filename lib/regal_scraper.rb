@@ -25,13 +25,13 @@ class Regal_scraper
 
 		movies = doc.css(".showtimes-container .showtime-panel")
 
-
+		theater = Theater.create_from_scraper(Regal_scraper.scrape_theater(url))
 		movies.collect do |movie|
 			showtimes_array = movie.css(".format-showtimes").text.split(/\s{2,}/).collect do |m|
 				m.split(/\s+/).join("").downcase
 			end
 			{
-				:theater => Theater.create_from_scraper(Regal_scraper.scrape_theater(url)),
+				:theater => theater,
 				:title => movie.css(".title a").text.split(/\s{2,}/)[1],
 				:showtimes => showtimes_array.sort.join(" "),
 				:rating => movie.css(".list-inline title").text.split("Rated ")[1],
