@@ -1,4 +1,3 @@
-require "pry"
 class Theater
 	attr_accessor :name, :address, :phone_number, :movies, :chain, :website
 	@@all = []

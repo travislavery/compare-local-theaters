@@ -1,5 +1,3 @@
-require "pry"
-require "colorize"
 class Movie
 	attr_accessor :title, :rating, :length, :theaters
 	@@all = []

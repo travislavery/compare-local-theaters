@@ -6,3 +6,7 @@ regal_movies = Regal_scraper.scrape_movies("https://www.regmovies.com/theaters/r
 cinemark_movies = Cinemark_scraper.scrape_movies("https://www.cinemark.com/utah/cinemark-sugar-house")
 
 CommandLineInterface.new(regal_movies, cinemark_movies).start
+
+#### SHOULDN'T BE NEEDED ####
+#regal_theater_url = "https://www.regmovies.com/theaters/regal-crossroad-14-rpx/c00662716661"
+#cinemark_theater_url = "https://www.cinemark.com/utah/cinemark-sugar-house"

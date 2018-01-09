@@ -1,8 +1,8 @@
-require "pry"
+require "colorize"
 require_relative "./movie.rb"
 require_relative "./theater.rb"
-require_relative "./regal_scraper.rb"
-require_relative "./cinemark_scraper.rb"
+require_relative "./scrapers/regal_scraper.rb"
+require_relative "./scrapers/cinemark_scraper.rb"
 
 class CommandLineInterface
 	attr_accessor :keep_viewing, :current_theater
@@ -13,6 +13,7 @@ class CommandLineInterface
 			Movie.create_from_scraper(arg)
 		end
 	end
+
 	def start
 		puts "	Welcome to Compare Local Theaters!"
 		puts "----------------------------------------------"
@@ -112,9 +113,3 @@ class CommandLineInterface
 		puts "----------------------------------------------------------".colorize(:white)
 	end
 end
-
-#### SHOULDN'T BE NEEDED ####
-#regal_theater = Regal_scraper.scrape_theater("https://www.regmovies.com/theaters/regal-crossroad-14-rpx/c00662716661")
-#cinemark_theater = Cinemark_scraper.scrape_theater("https://www.cinemark.com/utah/cinemark-sugar-house")
-#cinemark = Theater.create_from_scraper(cinemark_theater)
-#regal = Theater.create_from_scraper(regal_theater)
