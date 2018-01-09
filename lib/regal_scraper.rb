@@ -13,7 +13,7 @@ class Regal_scraper
 		{
 			:website => url,
 			:chain => :regal,
-			:name => theater_info.css("h1").text,
+			:name => theater_info.css("h1").text.split(" &")[0],
 			:address => theater_info.css(".address a").text.split(" view")[0],
 			:phone_number => "None"
 		}

@@ -1,4 +1,5 @@
 require "pry"
+require "colorize"
 class Movie
 	attr_accessor :title, :rating, :length, :theaters
 	@@all = []
@@ -53,23 +54,33 @@ class Movie
 	end
 
 	def self.show_times
+		colors_for_theaters = []
+		Theater.all.count.times do 
+			colors_for_theaters << String.colors.sample
+		end
 		self.all.each_with_index do |movie, i|
-			puts "#{i+1}. #{movie.title}"
-			cinemark = movie.theaters.find{|theater| theater.chain == :cinemark}
-			if cinemark == nil
-				cinemark_movie_showtimes = "No showings at this theater."
-			else
-				cinemark_movie_showtimes = cinemark.movies["#{movie.title}"][:showtimes]
+			puts "#{i+1}. #{movie.title}".colorize(:blue)
+			movie.theaters.each_with_index do |theater, i|
+				showtimes = theater.movies["#{movie.title}"][:showtimes]
+				puts "	#{theater.name}: #{showtimes}".colorize(colors_for_theaters[i])
 			end
+			puts "----------------------------------------".colorize(:black)
+			#cinemark = movie.theaters.find{|theater| theater.chain == :cinemark}
+			#if cinemark == nil
+			#	cinemark_movie_showtimes = "No showings at this theater."
+			#else
+			#	cinemark_movie_showtimes = cinemark.movies["#{movie.title}"][:showtimes]
+			#end
+			#
+			#regal = movie.theaters.find{|theater| theater.chain == :regal}
+			#if regal == nil
+			#	regal_movie_showtimes = "No showings at this theater"
+			#else
+			#	regal_movie_showtimes = regal.movies["#{movie.title}"][:showtimes]
+			#end
+			#puts "	Cinemark: #{cinemark_movie_showtimes}".colorize(:light_blue)
+			#puts "	Regal: #{regal_movie_showtimes}".colorize(:light_green)
 			
-			regal = movie.theaters.find{|theater| theater.chain == :regal}
-			if regal == nil
-				regal_movie_showtimes = "No showings at this theater"
-			else
-				regal_movie_showtimes = regal.movies["#{movie.title}"][:showtimes]
-			end
-			puts "Cinemark: #{cinemark_movie_showtimes}"
-			puts "Regal: #{regal_movie_showtimes}"
 		end
 	end
 
