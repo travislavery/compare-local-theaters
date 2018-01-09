@@ -37,13 +37,13 @@ class Theater
 	end
 
 	def self.theater_info
-		self.all.each do |theater|
-			puts "----------------------------".colorize(:white)
-			puts "	#{theater.name}"
-			puts "----------------------------".colorize(:white)
-			puts "Address: #{theater.address}".colorize(:light_blue)
-			puts "Phone Number: #{theater.phone_number}".colorize(:light_blue)
-			puts "Website: #{theater.website}".colorize(:light_blue)
+		self.all.each_with_index do |theater, i|
+			puts "--------------------------------------".colorize(:white)
+			puts "#{i+1}. #{theater.name}"
+			puts "--------------------------------------".colorize(:white)
+			puts "#{theater.address}\n".colorize(:light_blue)
+			puts "#{theater.phone_number}\n".colorize(:light_blue)
+			puts "#{theater.website}".colorize(:light_blue)
 			#puts "Currently showing: #{theater.movie_titles.join(", ")}".colorize(:light_green)
 		end
 	end
@@ -60,5 +60,10 @@ class Theater
 			puts "#{i+1}. #{movie[0]}".colorize(:dark_blue)
 			puts "	#{movie[1][:showtimes]}".colorize(:light_blue)
 		end
+	end
+
+	def movie_by_input(input)
+		movie_title = self.movie_titles[input]
+		self.movies[movie_title][:movie]
 	end
 end
