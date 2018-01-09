@@ -24,8 +24,6 @@ class Theater
 			:movie => movie,
 			:showtimes => showtimes
 		}
-		#binding.pry
-
 	end
 
 	def more_info
@@ -43,7 +41,6 @@ class Theater
 			puts "#{theater.address}\n".colorize(:light_blue)
 			puts "#{theater.phone_number}\n".colorize(:light_blue)
 			puts "#{theater.website}".colorize(:light_blue)
-			#puts "Currently showing: #{theater.movie_titles.join(", ")}".colorize(:light_green)
 		end
 	end
 
@@ -55,7 +52,6 @@ class Theater
 
 	def showtimes
 		self.movies.each_with_index do |movie, i|
-			#binding.pry
 			puts "#{i+1}. #{movie[0]}".colorize(:dark_blue)
 			puts "	#{movie[1][:showtimes]}".colorize(:light_blue)
 		end
