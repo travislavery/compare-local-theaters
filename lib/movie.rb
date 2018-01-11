@@ -61,9 +61,6 @@ class Movie
 		end
 	end
 
-	def more_info
-		puts "#{self.title}"
-		puts "Rating: #{self.rating}"
-		puts "Length: #{self.length}"
-	end
+
 end
+

@@ -26,36 +26,12 @@ class Theater
 		}
 	end
 
-	def more_info
-		puts "#{self.name}"
-		puts "Address: #{self.address}"
-		puts "Phone Number: #{self.phone_number}"
-		puts "Website: #{self.website}"
-	end
-
-	def self.theater_info
-		self.all.each_with_index do |theater, i|
-			puts "--------------------------------------".colorize(:white)
-			puts "#{i+1}. #{theater.name}"
-			puts "--------------------------------------".colorize(:white)
-			puts "#{theater.address}\n".colorize(:light_blue)
-			puts "#{theater.phone_number}\n".colorize(:light_blue)
-			puts "#{theater.website}".colorize(:light_blue)
-		end
-	end
-
 	def movie_titles
 		self.movies.collect do |movie|
 			movie[0]
 		end
 	end
 
-	def showtimes
-		self.movies.each_with_index do |movie, i|
-			puts "#{i+1}. #{movie[0]}".colorize(:dark_blue)
-			puts "	#{movie[1][:showtimes]}".colorize(:light_blue)
-		end
-	end
 
 	def movie_by_input(input)
 		movie_title = self.movie_titles[input]

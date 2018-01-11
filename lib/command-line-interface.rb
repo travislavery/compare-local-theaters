@@ -1,8 +1,3 @@
-require "colorize"
-require_relative "./movie.rb"
-require_relative "./theater.rb"
-require_relative "./scrapers/regal_scraper.rb"
-require_relative "./scrapers/cinemark_scraper.rb"
 
 class CommandLineInterface
 	attr_accessor :keep_viewing, :current_theater
@@ -48,20 +43,20 @@ class CommandLineInterface
 			CommandLineInterface.instructions
 			while self.keep_viewing
 				user_input = check_input("movie")
-				Movie.all[user_input].more_info
+				movie_info(Movie.all[user_input])
 			end
 		elsif specify == "single"
-			@current_theater.showtimes
+			showtimes
 			CommandLineInterface.instructions
 			while self.keep_viewing
 				user_input = check_input("movie")
-				@current_theater.movie_by_input(user_input).more_info
+				movie_info(@current_theater.movie_by_input(user_input))
 			end
 		end
 	end
 
 	def theater_commands
-		Theater.theater_info
+		theater_info
 		puts "----------------------------------------------------------".colorize(:white)
 		number = "number".colorize(:red)
 		puts "Type a theater's '#{number}' to view more information about it."
@@ -111,5 +106,30 @@ class CommandLineInterface
 		exit_colored = "exit".colorize(:red)
 		puts "Type '#{exit_colored}' to exit the application"
 		puts "----------------------------------------------------------".colorize(:white)
+	end
+
+	def theater_info
+		Theater.all.each_with_index do |t, i|
+			puts "--------------------------------------".colorize(:white)
+			puts "#{i+1}. #{t.name}"
+			puts "--------------------------------------".colorize(:white)
+			puts "#{t.address}\n".colorize(:light_blue)
+			puts "#{t.phone_number}\n".colorize(:light_blue)
+			puts "#{t.website}".colorize(:light_blue)
+		end
+	end
+
+
+	def showtimes
+		current_theater.movies.each_with_index do |movie, i|
+			puts "#{i+1}. #{movie[0]}".colorize(:dark_blue)
+			puts "	#{movie[1][:showtimes]}".colorize(:light_blue)
+		end
+	end
+
+	def movie_info(movie)
+		puts "#{movie.title}"
+		puts "Rating: #{movie.rating}"
+		puts "Length: #{movie.length}"
 	end
 end

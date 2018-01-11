@@ -1,7 +1,3 @@
-require "nokogiri"
-require "pry"
-require "open-uri"
-
 class Regal_scraper
 
 	def self.scrape_theater(url)
