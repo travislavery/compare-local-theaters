@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require_relative "../lib/command-line-interface.rb"
+require_relative "../lib/environment.rb"
 
 regal_movies = Regal_scraper.scrape_movies("https://www.regmovies.com/theaters/regal-crossroad-14-rpx/c00662716661")
 cinemark_movies = Cinemark_scraper.scrape_movies("https://www.cinemark.com/utah/cinemark-sugar-house")
